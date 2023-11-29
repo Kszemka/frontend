@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task and Categories Tabs</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class = "wrapper pre">
+    </div>
+    <div class="wrapper">
+      <div class="title">
+        Test Tabs
+        <div class="line"></div>
+      </div>
+      <div class="container">
+        <div class="card tabs">
+          <input id="tab-1" type="radio" class="tab tab-selector" checked="checked" name="tab" />
+          <label for="tab-1" class="tab tab-primary">BE1</label>
+          <input id="tab-2" type="radio" class="tab tab-selector" name="tab" />
+          <label for="tab-2" class="tab tab-success">BE2</label>
+          <div class="tabsShadow"></div>
+          <div class="glider"></div>
+          <section class="content">
+            <div class="item" id="content-1">
+              <h2 class="tab-title tab-primary">Tasks from BE1</h2>
+              <p id = "taskContent"> </p>
+            </div>
+            <div class="item" id="content-2">
+              <h2 class="tab-title tab-success">Categories from BE2</h2>
+              <p id = "categoryContent"> </p>
+            </div>
+          </section>
+    
+        </div>
+      </div>
+    </div>
+  <script>
+    // Fetch and populate tasks
+    const taskContent = document.getElementById("taskContent");
+    fetch("http://localhost:8080/tasks")
+      .then(response => response.json())
+      .then(tasks => {
+        tasks.forEach(task => {
+          taskContent.innerHTML += `<span class="numit">${task.name} ${task.deadline}, Category: ${task.category} </span></br>`;
+        });
+      });
+
+    // Fetch and populate categories
+    const categoryContent = document.getElementById("categoryContent");
+    fetch("http://localhost:5000/task-categories")
+      .then(response => response.json())
+      .then(categories => {
+        categories.forEach(category => {
+          categoryContent.innerHTML += `<span class="numit">${category.id}. name: ${category.category_name}</span></br>`;
+        });
+      });
+  </script>
+</body>
+</html>
