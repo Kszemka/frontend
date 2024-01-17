@@ -39,7 +39,7 @@
   <script>
     // Fetch and populate tasks
     const taskContent = document.getElementById("taskContent");
-    fetch("http://localhost:8080/tasks")
+    fetch("http://localhost/tasks")
       .then(response => response.json())
       .then(tasks => {
         tasks.forEach(task => {
@@ -49,7 +49,7 @@
 
     // Fetch and populate categories
     const categoryContent = document.getElementById("categoryContent");
-    fetch("http://localhost:5000/task-categories")
+    fetch("http://localhost/categories")
       .then(response => response.json())
       .then(categories => {
         categories.forEach(category => {
